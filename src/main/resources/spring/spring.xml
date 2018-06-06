@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+       <!--配置安全管理器-->
+       <bean class="org.apache.shiro.mgt.DefaultSecurityManager">
+              <!--把realm交给manager管理-->
+              <property name="realm" ref="realm"></property>
+        </bean>
+
+
+       <!--配置realm-->
+       <bean id="realm" class="com.jiyun.springshiro.realm.CustomRealm">
+
+              <!--设置MD5-->
+              <property name="credentialsMatcher" ref="credentialsMatcher" />
+       </bean>
+
+       <!--配置MD5-->
+       <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+              <!--设置加密类的加密方式-->
+              <property name="hashAlgorithmName" value="md5" />
+              <property name="hashIterations" value="1"/>
+              <!--设置加密的次数-->
+       </bean>
+       <!--spring的配置文件-->
+
+
+</beans>
